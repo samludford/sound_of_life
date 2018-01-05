@@ -34,8 +34,8 @@ void ofApp::setup(){
     mSoundGrid = SoundGrid(ROWS, COLUMNS);
     
     // audio setup
-    sampleRate 	= 44100; /* Sampling Rate */
-    bufferSize	= 512; /* Buffer Size. you have to fill this buffer with sound using the for loop in the audioOut method */
+    sampleRate 	= 44100;
+    bufferSize	= 512;
     
     ofxMaxiSettings::setup(sampleRate, 2, bufferSize);
     
@@ -43,7 +43,7 @@ void ofApp::setup(){
     ofEnableAlphaBlending();
     ofEnableSmoothing();
     
-    ofSoundStreamSetup(2,2,this, sampleRate, bufferSize, 4); /* this has to happen at the end of setup - it switches on the DAC */
+    ofSoundStreamSetup(2,2,this, sampleRate, bufferSize, 4);
     
     
 }
@@ -74,7 +74,6 @@ void ofApp::draw(){
             float val = myLife.valueAt(i,j);
             if(val == 0) {
                 brightness = 0;
-//                mSoundGrid.trigger_at(i, j, 0);
             } else {
                 brightness = 255 / val;
                 mSoundGrid.trigger_at(i, j, 1/val);
@@ -91,8 +90,6 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
     
     for (int i = 0; i < bufferSize; i++){
         
-//        double wave = ;
-//        double wave = dist.atanDist(mSoundGrid.get_signal(), 2);
         double wave = mSoundGrid.get_signal();
         output[i*nChannels    ] = wave; /* You may end up with lots of outputs. add them here */
         output[i*nChannels + 1] = wave;
@@ -105,7 +102,6 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
 void ofApp::audioIn(float * input, int bufferSize, int nChannels){
     
     for(int i = 0; i < bufferSize; i++){
-        /* you can also grab the data out of the arrays*/
         
     }
     

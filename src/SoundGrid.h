@@ -42,8 +42,6 @@ class Sound {
     
         maxiOsc *lfo;
         maxiOsc *osc;
-//        maxiEnvelope *env;
-//        maxiFilter *rampDown;
         maxiFilter *glide;
     
 };
