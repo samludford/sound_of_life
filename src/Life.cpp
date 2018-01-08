@@ -62,14 +62,12 @@ void Life::update() {
     for(int i=0 ; i<rows ; i++) {
         for(int j=0 ; j<columns ; j++) {
             int count = getLivingNeighbourCount(i, j);
-            
             int pos = get_position(i, j);
             if (grid[pos] > 0) {
                 grid_buffer[pos] = !(count < 2 || count > 3) ? 1 : 0;
             } else {
                 grid_buffer[pos] = (count == 3) ? 1 : 0;
             }
-        
         }
     }
     
