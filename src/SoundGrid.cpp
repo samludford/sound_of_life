@@ -23,6 +23,8 @@ SoundGrid::SoundGrid(int rows, int columns) {
     this->rows = rows;
     this->columns = columns;
     
+    // create a new sound for each row
+    // each sound is given a different LFO rate
     sounds.resize( rows );
     for(int i=0 ; i<rows ; i++) {
         sounds[i] = new Sound();
@@ -37,6 +39,7 @@ void SoundGrid::trigger_at(int row, int column, int val) {
 }
 
 double SoundGrid::get_signal() {
+    // sums and scales the signals from each sound
     double sig = 0;
     for(int i=0; i<rows; i++) {
         sig += sounds[i]->get_signal();
@@ -61,6 +64,10 @@ void Sound::trigger(double val, double freq) {
 }
 
 double Sound::get_signal() {
+    
+    // get the tremolo signal
+    // add one 1 divide by 2 to move from range [-1,1] -> [0,1]
     double a = (lfo->sinewave(lfo_freq)+1)/2;
+    // get the osc signal, using a lopass filter to add some glide
     return osc->sinewave(glide->lopass(this->freq,0.001)) * a;
 }

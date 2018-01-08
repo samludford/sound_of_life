@@ -51,6 +51,7 @@ void ofApp::setup(){
 //--------------------------------------------------------------
 void ofApp::update(){
     
+    // update the Life simulation once every RATE frames
     if(counter % RATE == 0) {
         myLife.update();
     }
@@ -90,6 +91,7 @@ void ofApp::audioOut(float * output, int bufferSize, int nChannels) {
     
     for (int i = 0; i < bufferSize; i++){
         
+        // defer audio processing to the SoundGrid object
         double wave = mSoundGrid.get_signal();
         output[i*nChannels    ] = wave; /* You may end up with lots of outputs. add them here */
         output[i*nChannels + 1] = wave;
@@ -110,6 +112,7 @@ void ofApp::audioIn(float * input, int bufferSize, int nChannels){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+    // when a key is pressed, stimulate a few cells
     myLife.stimulateCellAt(4, 4);
     myLife.stimulateCellAt(4, 5);
     myLife.stimulateCellAt(4, 6);
